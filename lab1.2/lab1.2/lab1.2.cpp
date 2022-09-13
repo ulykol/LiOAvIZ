@@ -13,7 +13,7 @@ int main(void)
     printf("Заполнение массива случайными числами:\n");
     for (i = 0; i < N; i++)
     {
-        A[i] = rand() % +40;
+        A[i] = rand() % 51 - 25;
         printf("%4d", A[i]);
     }
 

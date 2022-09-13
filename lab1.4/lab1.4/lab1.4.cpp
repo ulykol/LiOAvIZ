@@ -1,44 +1,68 @@
-﻿#include <stdio.h>
-#include <conio.h>
-#include <windows.h>
-#include <string.h>
-#include <locale>
+﻿#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <iostream>
+#include <locale.h>
 
 int main()
 {
-	srand(time(0));
-	setlocale(LC_ALL, "rus");
-	const int N = 4, M = 5;
-	int A[N][M], i, j;
-	int sum;
+	srand(time(NULL));
+	setlocale(LC_ALL, "Rus");
 
-	printf("\n");
-	printf("   Матрица 4х5:\n ");
-	printf("\n");
+	int i, j, rows, cols, ** A;
 
-	for (i = 0; i < N; i++)
+	printf("Введите количество строк = ");
+	scanf_s("%d", &rows);
+
+	printf("Введите количество столбцов = ");
+	scanf_s("%d", &cols);
+
+	A = (int**)malloc(rows * sizeof(int*));
+
+	for (int i = 0; i < cols; i++)
 	{
-		for (j = 0; j < M; j++)
-		{
-			A[i][j] = rand() % +4;
-			printf("%5d", A[i][j]);
-		}
-		printf("\n");
-		printf("\n");
+		A[i] = (int*)malloc(cols * sizeof(int));
 	}
 
-	printf("   Вектор D, компоненты которого равны сумме элементов строк матрицы:\n ");
-	for (i = 0; i < N; i++)
+	for (i = 0; i < rows; i++)
 	{
-		sum = 0;
-		for (j = 0; j < M; j++)
+		for (j = 0; j < cols; j++)
 		{
-			sum = sum + A[i][j];
+			A[i][j] = rand() % + 10;
 		}
-		printf("\n");
-		printf("   [%d]", sum);
 	}
 
-	system("pause>0");
+	for (int i = 0; i < rows; i++)
+	{
+		printf("\n");
+		for (int j = 0; j < cols; j++)
+		{
+			printf("\t %d", A[i][j]);
+		}
+	}
+	printf("\n\nВектор, компоненты которого равны сумме элементов строк матрицы: \n");
+	for (int i = 0; i < rows; i++)
+	{
+		int sumElem = 0;
+		for (int j = 0; j < cols; j++)
+		{
+			sumElem += A[i][j];
+		}
+		printf("\n   [%d]", sumElem);
+	}
 
+	printf("\n\nВектор, компоненты которого равны сумме элементов столбцов матрицы: \n");
+	for (int i = 0; i < cols; i++)
+	{
+		int sumElem = 0;
+		for (int j = 0; j < rows; j++)
+		{
+			sumElem += A[j][i];
+		}
+		printf("\n   [%d]", sumElem);
+	}
+
+	free(A);
+
+	getchar();
+	getchar();
 }
